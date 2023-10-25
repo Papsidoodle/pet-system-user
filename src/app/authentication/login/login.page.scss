@@ -1,0 +1,110 @@
+ion-content {
+    --background: rgba(182, 156, 101, 0.5);
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+  }
+  .logo > img{
+    width: 150px;
+    height: auto;
+    border-radius: 50%; 
+  }
+  .logo > h1 {
+    margin-left: 20px;
+    font-weight:900;
+    font-family:Tahoma;
+    font-size: 30px;
+  }
+  
+  .ion-padding {
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+  
+      form {
+        background-color: rgba(255, 255, 255, 0.7);
+        height: max-content;
+        width: 100%;
+        padding-top: 100px;
+        max-width: 400px;
+        padding: 15px;
+        background-color: beige;
+        box-shadow: 0 0 5px rgba(52, 11, 11, 0.7);
+        border-radius: 20px;
+
+        animation: slide-up .5s ease-out;
+  
+        ion-item {
+          --background: #ececec;
+          border-radius: 10px;
+  
+          &:hover {
+            outline: 2px solid rgb(0, 144, 41);
+          }
+  
+          ion-note {
+            background: #ececec;
+            margin-bottom: 5px;
+            color: red;
+            font-size: 13px;
+            font-family: Tahoma;
+          }
+        }
+  
+        .icon {
+          color: rgb(91, 91, 224);
+  
+          position: relative;
+          top: 0.5rem;
+        }
+  
+      }
+  
+      .noAcc {
+        position: relative;
+        text-align: center;
+
+        a {
+          color: rgb(8, 168, 56);
+        }
+      }
+  
+      .fpass{
+          display: flex;
+          position: relative;
+          justify-content: end;
+      }
+  
+      .buttons {
+        .signupBtn {
+  
+          ion-button.signUp {
+            --background: rgb(24, 223, 24);
+  
+            font-size: 20px;
+  
+            height: 40px;
+          }
+          margin-top: 1rem;
+        }
+      }
+    }
+    
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }    
+}  
