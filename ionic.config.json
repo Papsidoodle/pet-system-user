@@ -1,0 +1,7 @@
+{
+  "name": "pet-system-user",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
