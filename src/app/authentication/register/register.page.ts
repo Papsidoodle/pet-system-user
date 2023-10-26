@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/users/user.service';
 
-import { switchMap, tap } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -81,11 +81,11 @@ export class RegisterPage implements OnInit {
   submit() {
     const {firstname, middlename, lastname, contact, houseNo, street, brgy, email, password} = this.credentials.value;
     
-    // this.auth.signup(email,password).pipe(
+    // this.auth.signup(email, password).pipe(
     //   switchMap(({ user: {uid} }) =>
-    //   this.userService.addUser({
-    //     uid, firstname, middlename, lastname, contact, houseNo, street, brgy, email, password
-    //   })
+    //     this.userService.addUser({
+    //       uid, firstname, middlename, lastname, contact, houseNo, street, brgy, email, password
+    //     })
     //   ),
     // ).subscribe(()=>{
     //   this.route.navigate(['/login']);

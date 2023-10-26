@@ -3,14 +3,14 @@ export const environment = {
   
   // firebase configuration
   firebase: {
-    projectId: 'capstone-4ff0a',
-    appId: '1:33171358581:web:5d0a318b4d48defdb3493c',
-    storageBucket: 'capstone-4ff0a.appspot.com',
-    locationId: 'us-central',
-    apiKey: 'AIzaSyDV8Xfwot_cantk2MkLTlNrtw1lEHZUZMI',
-    authDomain: 'capstone-4ff0a.firebaseapp.com',
-    messagingSenderId: '33171358581',
-    measurementId: 'G-B3DLN3N3LM',
+    apiKey: "AIzaSyDiynEDQ-kDunrovYufQFUIXAbR_fIwTi0",
+    authDomain: "sampleapp-3995f.firebaseapp.com",
+    databaseURL: "https://sampleapp-3995f-default-rtdb.firebaseio.com",
+    projectId: "sampleapp-3995f",
+    storageBucket: "sampleapp-3995f.appspot.com",
+    messagingSenderId: "262296842404",
+    appId: "1:262296842404:web:edb5defe5da120f9477631",
+    measurementId: "G-7K3VE1X15Q"
   },
 
 };

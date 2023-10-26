@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ForgotPassModalPage } from '../forgot-pass-modal/forgot-pass-modal.page';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +18,21 @@ export class LoginPage implements OnInit {
 		private fb: FormBuilder,
 		private loadingController: LoadingController,
 		private alertController: AlertController,
+		private modalCtrl: ModalController,
 		private authService: AuthService,
 		private router: Router
 	) {}
 
-	// Easy access for form fields
+	// forgot pass modal
+	async openModal() {
+		const modal = await this.modalCtrl.create({
+			component: ForgotPassModalPage
+		});
+
+		modal.present();
+	}
+
+	// get input values
 	get email() {
 		return this.credentials.get('email');
 	}
@@ -39,27 +49,31 @@ export class LoginPage implements OnInit {
 
 	async login() {
 		const loading = await this.loadingController.create({
-      message: 'Logging in',
-      spinner: 'circles'
-    });
+			message: 'Logging in',
+			spinner: 'circles'
+		});
 
-		await loading.present();
 
 		const { email, password } = this.credentials.value;
 
-		// try {
-		//   await this.authService.login(email, password).toPromise();
-		//   this.router.navigate(['/home']);
-    //   this.credentials.reset();
+		try {
+			await this.authService.login(email, password).toPromise();
+			await loading.present();
+		  	this.router.navigate(['/homescreen']);
+      		this.credentials.reset();
 
-		// } catch (error: any) {
-		//   if (error.code === 'auth/user-not-found') {
-    //     this.showAlert('Email not registered', 'The provided email is not registered.');
-    //     this.credentials.reset();
-		//   }
-		// } finally {
-		//   loading.dismiss();
-		// }
+			setTimeout(() => {
+				loading.dismiss();
+			}, 1400)
+
+		} catch (error: any) {
+		  if (error.code === 'auth/user-not-found') {
+			this.showAlert('Email not registered', 'The provided email is not registered.');
+			this.credentials.reset();
+		  }
+		} finally {
+		  loading.dismiss();
+		}
 	}
 	  
 

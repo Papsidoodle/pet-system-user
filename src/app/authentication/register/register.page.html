@@ -1,5 +1,5 @@
-<ion-content> 
-  
+<ion-content [fullscreen]="true">
+
   <form (ngSubmit)="submit()" [formGroup]="credentials" >
     <h1>Registration Form</h1>
     <ion-label>Personal Information</ion-label>
@@ -12,11 +12,11 @@
         </ion-item>
       </div>
       
-      <!-- AYUSIN MO TO -->
+  
       <div class="middle">
         <ion-item lines="none" class="ion-margin-bottom">
           <ion-label position="floating">Middle Name</ion-label>
-          <ion-input></ion-input>
+          <ion-input placeholder="Santos" formControlName="middlename"></ion-input>
         </ion-item>
       </div>
     </div>

@@ -1,48 +1,44 @@
 import { Injectable } from '@angular/core';
-// import {
-// 	Auth,
-// 	signInWithEmailAndPassword,
-// 	createUserWithEmailAndPassword,
-// 	signOut,
-// 	authState, 
-// 	UserCredential,          
-// 	UserInfo
-// } from '@angular/fire/auth';
-// import { doc, Firestore, setDoc } from '@angular/fire/firestore';
-// import { updateProfile } from 'firebase/auth';
-// import { Observable, from, of, switchMap,concatMap} from 'rxjs';
+import { Auth, authState, UserCredential, UserInfo, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { updateProfile } from 'firebase/auth';
+import { Observable, concatMap, from, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-
+ 	
+	constructor (
+		private auth: Auth,
+		// private fireAuth: AngularFireAuth
+	) {}
+		
 	// currentUser$ = authState(this.auth);
 
-  	// constructor(private auth: Auth, private fstore : Firestore) {}
+	// signup
+	signup(email: string, password:string):Observable<UserCredential> {
+		return from(createUserWithEmailAndPassword(this.auth, email, password));
+	}
 
-	// signup(email: string,password:string):Observable<UserCredential>{
-	// 	return from(createUserWithEmailAndPassword(this.auth,email,password));
-		
-	// }
+	// login
+	login(email: string, password:string):Observable<any> {
+		return from(signInWithEmailAndPassword(this.auth, email, password));
+	}
 
-	// login(email: string,password:string):Observable<any>{
-	// 	return from(signInWithEmailAndPassword(this.auth,email,password));
-	// }
 
-	// logout():Observable<any>{
-	// 	return from(this.auth.signOut());
-	// }
+	async logout() {
+		// return await this.fireAuth.signOut(); 
+	}
 
-	
-	// updateProfile(profileData: Partial<UserInfo>):Observable<any>{
-	// 	const user = this.auth.currentUser;
-	// 	return of(user).pipe(
-	// 		concatMap((user) => {
-	// 			if(!user) throw new Error('Not Authenticated');
-	// 			return updateProfile(user,profileData);
-	// 		})
-	// 	);
-	// }
+	updateProfile(profileData: Partial<UserInfo>):Observable<any> {
+		const user = this.auth.currentUser;
+		return of(user).pipe(
+			concatMap((user) => {
+				if(!user) throw new Error('Not Authenticated');
+				return updateProfile(user, profileData);
+			})
+		);
+	}
 }

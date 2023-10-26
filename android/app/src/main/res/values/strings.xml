@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PetsCure User</string>
+    <string name="title_activity_main">PetsCure User</string>
+    <string name="package_name">com.petscure.app</string>
+    <string name="custom_url_scheme">com.petscure.app</string>
+</resources>

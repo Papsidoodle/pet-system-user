@@ -5,7 +5,7 @@
     <form (ngSubmit)="login()" [formGroup]="credentials"  >
 
       <div class="logo">
-        <img src="/assets/petcure.jpg" alt="">
+        <img src="/assets/petscure.jpg" alt="">
         <h1 class="">Login</h1>
       </div>
       
@@ -26,16 +26,16 @@
       </ion-item>
 
       <div class="fpass">
-        <p>Forgot password?</p>
+        <p (click)="openModal()">Forgot password?</p>
       </div>
 
       <div class="buttons">
-        <div class="loginBtn">
-          <ion-button type="submit" expand="block" shape="round" [disabled]="!credentials.valid">Sign In</ion-button>
+        <div class="login">
+          <ion-button class="loginBtn" type="submit" expand="block" shape="round" [disabled]="!credentials.valid">Sign In</ion-button>
         </div>
 
         <div class="noAcc">
-          <p>Don't have an account?  <a (click)="signup()">Login</a> </p>
+          <p>Don't have an account?  <a (click)="signup()">Sign up</a> </p>
         </div>
       </div>
     </form>

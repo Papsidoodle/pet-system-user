@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'pet-system-user',
+  appId: 'com.petscure.app',
+  appName: 'PetsCure User',
   webDir: 'www',
   server: {
     androidScheme: 'https'
