@@ -8,32 +8,33 @@ ion-content {
 
     .header {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
+
+        margin-right: 0.5rem;
 
         .petscureLogo {
             width: 75px;
             height: 75px;
-
             outline: 0.5px solid #ef0006;
         }
     
         .profile {
             display: flex;
-            flex-direction: row;
-        
-            justify-content: space-evenly;
+            position: relative;
+            justify-content: space-between;
             align-items: center;
 
             .profilePic {
                 width: 50px;
                 height: 50px;
-
                 outline: 1px solid;
             }
 
             p {
                 margin-right: 10px;
+                text-transform: capitalize;
+                font-weight: 700;
             }
         }
     }
@@ -120,4 +121,33 @@ ion-content {
         margin-bottom: 20px;
     }
 }
+.pet-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+.pet-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 2px solid;
+    width: 100%;
+    border-radius: 25px;
+    margin: 10px;
+  }
 
+  .pet-card img {
+    aspect-ratio: 1/1;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 25px 0 0 25px;
+  
+    
+  }
+  
+  .pet-card p {
+    margin-left: 20px;
+    text-transform: capitalize;
+  }

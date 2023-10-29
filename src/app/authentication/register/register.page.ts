@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/users/user.service';
 
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -22,6 +22,7 @@ export class RegisterPage implements OnInit {
     private auth:AuthService,
     private userService:UserService,
     private fb : FormBuilder,
+    private loadingCtrl: LoadingController,
     private toast : ToastController,
     private route: Router,
   ) { }
@@ -78,19 +79,33 @@ export class RegisterPage implements OnInit {
 		})
   }
 
-  submit() {
+  async submit() {
     const {firstname, middlename, lastname, contact, houseNo, street, brgy, email, password} = this.credentials.value;
-    
-    // this.auth.signup(email, password).pipe(
-    //   switchMap(({ user: {uid} }) =>
-    //     this.userService.addUser({
-    //       uid, firstname, middlename, lastname, contact, houseNo, street, brgy, email, password
-    //     })
-    //   ),
-    // ).subscribe(()=>{
-    //   this.route.navigate(['/login']);
-    //   this.credentials.reset();
-    // })
+
+    const loading = this.loadingCtrl.create({
+      message: 'Creating user',
+      spinner: 'circles'
+    });
+
+    (await loading).present();
+
+    this.auth.signup(email, password).pipe(
+      switchMap(({ user: {uid} }) =>
+        this.userService.addUser({
+          uid, firstname, middlename, lastname, contact, houseNo, street, brgy, email
+        })
+      ),
+    ).subscribe(async () => {
+      
+      setTimeout(async () => {
+        (await loading).dismiss();
+        
+        this.credentials.reset();
+        this.route.navigate(['/login']);
+      }, 1400);
+    });
+
+    // ayusin mo na lang yon trycatch lang sakin yon e
   }
 
   // navigate to login page

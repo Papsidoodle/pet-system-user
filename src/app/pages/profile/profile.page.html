@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="user$ | async as user">
+  <div class="container">
+    <ion-list>
+      <h6>Name</h6>
+      <h2>
+        {{user.firstname}} {{user.lastname}}
+      </h2>
+      <h6>Email</h6>
+      <h2>
+        {{user.email}}
+      </h2>
+    </ion-list>
+    <ion-button (click)="logout()" expand="block" fill="clear" shape="round">
+      Logout
+    </ion-button>
+  </div>
+</ion-content>

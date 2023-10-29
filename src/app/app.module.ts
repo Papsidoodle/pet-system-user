@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment.prod';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire/compat';
 
 // lottie shits
 import { LottieModule } from 'ngx-lottie';
@@ -34,7 +35,8 @@ export function playerFactory() {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage()),
-    LottieModule.forRoot({ player: playerFactory })
+    LottieModule.forRoot({ player: playerFactory }),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

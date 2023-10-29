@@ -1,32 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AnimationOptions } from 'ngx-lottie';
-
+import { UserService } from 'src/app/services/users/user.service';
+import { ProfileUser } from 'src/app/models/user';
+import { DogsInfoService } from 'src/app/services/pet/dogs/dogs-info.service';
+import { DogInfo } from 'src/app/services/pet/dogs/dog';
+import { CatsInfoService } from 'src/app/services/pet/cats/cats-info.service';
+import { CatInfo } from 'src/app/services/pet/cats/cat';
+import { Observable } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-homescreen',
   templateUrl: './homescreen.page.html',
   styleUrls: ['./homescreen.page.scss'],
 })
 export class HomescreenPage implements OnInit {
-
   selectedSegment: string = '1';
-  public search : string = '';
+  public search: string = '';
+  public dogInfo: Observable<DogInfo[]>;
+  public catInfo: Observable<CatInfo[]>;
+  public searchdog: Observable<DogInfo[]>;
+  public searchcat: Observable<CatInfo[]>;
+  user$ = this.userService.currenUs$;
 
   constructor(
-    private menuCtrl: MenuController
-  ) { }
+    private menuCtrl: MenuController,
+    private userService: UserService,
+    private dogservice: DogsInfoService,
+    private catservice: CatsInfoService,
+    private sanitizer: DomSanitizer
+  ) {
+    this.dogInfo = this.dogservice.getDogInfoAlphabetically();
+    this.catInfo = this.catservice.getCatInfoAlphabetically();
+  }
 
   openMenu() {
     this.menuCtrl.open('menu');
   }
 
   lottieoptionsdog: AnimationOptions = {
-    path:'assets/json/dog.json'
-  }
+    path: 'assets/json/dog.json',
+  };
 
   lottieoptionscat: AnimationOptions = {
-    path:'assets/json/cat.json'
-  }
+    path: 'assets/json/cat.json',
+  };
 
   segmentChanged() {
     // You can perform actions when the segment changes here if needed.
@@ -50,31 +68,29 @@ export class HomescreenPage implements OnInit {
   ];
 
   // search
-  onDogSearch(){
+  onDogSearch() {
     const searchlower = this.search.trim().toLowerCase();
     console.log('Search: ', searchlower);
 
-    // if (searchlower !== ''){
-    //   this.searchdog = this.dogservice.searchDog(searchlower);
-    // } else{
-    //   this.searchdog = null;
-    //   this.search = '';
-    // }  
+    if (searchlower !== '') {
+      this.searchdog = this.dogservice.searchDog(searchlower);
+    } else {
+      this.searchdog = null;
+      this.search = '';
+    }
   }
 
-  onCatSearch(){
+  onCatSearch() {
     const searchlower = this.search.trim().toLowerCase();
     console.log('Search: ', searchlower);
 
-    // if (searchlower !== ''){
-    //   this.searchcat = this.catservice.searchCat(searchlower);
-    // } else{
-    //   this.searchcat = null;
-    //   this.search = '';
-    // }  
+    if (searchlower !== '') {
+      this.searchcat = this.catservice.searchCat(searchlower);
+    } else {
+      this.searchcat = null;
+      this.search = '';
+    }
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

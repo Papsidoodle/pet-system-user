@@ -36,54 +36,60 @@ const routes: Routes = [
     loadChildren: () => import('./pages/homescreen/homescreen.module').then( m => m.HomescreenPageModule)
   },
   {
-    path: 'cat-main',
+    path: 'cat-main/:id',
     loadChildren: () => import('./pages/pets-content/cats-content/cat-main/cat-main.module').then( m => m.CatMainPageModule)
   },
   {
-    path: 'cat-info',
+    path: 'cat-info/:id',
     loadChildren: () => import('./pages/pets-content/cats-content/cat-info/cat-info.module').then( m => m.CatInfoPageModule)
   },
   {
-    path: 'dog-info',
+    path: 'dog-info/:id',
     loadChildren: () => import('./pages/pets-content/dogs-content/dog-info/dog-info.module').then( m => m.DogInfoPageModule)
   },
   {
-    path: 'dog-main',
+    path: 'dog-main/:id',
     loadChildren: () => import('./pages/pets-content/dogs-content/dog-main/dog-main.module').then( m => m.DogMainPageModule)
   },
   {
-    path: 'cat-meds',
+    path: 'cat-meds/:id',
     loadChildren: () => import('./pages/pets-content/cats-content/cat-meds/cat-meds.module').then( m => m.CatMedsPageModule)
   },
   {
-    path: 'cat-foods',
+    path: 'cat-foods/:id',
     loadChildren: () => import('./pages/pets-content/cats-content/cat-foods/cat-foods.module').then( m => m.CatFoodsPageModule)
   },
   {
-    path: 'cat-grooming',
+    path: 'cat-grooming/:id',
     loadChildren: () => import('./pages/pets-content/cats-content/cat-grooming/cat-grooming.module').then( m => m.CatGroomingPageModule)
   },
   {
-    path: 'cat-activities',
+    path: 'cat-activities/:id',
     loadChildren: () => import('./pages/pets-content/cats-content/cat-activities/cat-activities.module').then( m => m.CatActivitiesPageModule)
-  },  {
-    path: 'dog-foods',
+  },
+  {
+    path: 'dog-foods/:id',
     loadChildren: () => import('./pages/pets-content/dogs-content/dog-foods/dog-foods.module').then( m => m.DogFoodsPageModule)
   },
   {
-    path: 'dog-activities',
+    path: 'dog-activities/:id',
     loadChildren: () => import('./pages/pets-content/dogs-content/dog-activities/dog-activities.module').then( m => m.DogActivitiesPageModule)
   },
   {
-    path: 'dog-grooming',
+    path: 'dog-grooming/:id',
     loadChildren: () => import('./pages/pets-content/dogs-content/dog-grooming/dog-grooming.module').then( m => m.DogGroomingPageModule)
   },
   {
-    path: 'dog-meds',
+    path: 'dog-meds/:id',
     loadChildren: () => import('./pages/pets-content/dogs-content/dog-meds/dog-meds.module').then( m => m.DogMedsPageModule)
   },
-
-
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },  {
+    path: 'verify-email',
+    loadChildren: () => import('./authentication/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+  },
 
 
 ];

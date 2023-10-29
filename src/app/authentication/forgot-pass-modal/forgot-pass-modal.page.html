@@ -1,14 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-item lines="none">
       <ion-button slot="start" fill="clear" (click)="closeModal()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
-      <ion-title style="text-align: left;">Reset Password</ion-title>
-    </ion-item>
+      <p style="text-align: left">Reset Password</p>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
+  <!-- Ayusin design -->
+
+  <form (ngSubmit)="resetPassword()" [formGroup]="credentials">
+    <!-- Email Input -->
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" email formControlName="email"></ion-input>
+
+      <ion-note *ngIf="(email.dirty || email.touched) && email.errors">
+        Please provide a valid Email.
+      </ion-note>
+    </ion-item>
+    <div class="forgot">
+      <ion-button class="forgotBtn" type="submit" expand="block" shape="round" [disabled]="!credentials.valid">Reset Password</ion-button>
+    </div>
+  </form>
+
 </ion-content>

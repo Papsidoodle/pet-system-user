@@ -37,13 +37,14 @@ ion-button {
     height: 40px;
 }
 
+.custom-alert .alert-title {
+    color: #ff0808; 
+}
+
 .custom-alert .alert-message{
-    color: #ff0808;/* Style the message text */
-  }
+    color: #000;
+}
 
 .custom-alert .alert-wrapper {
-    background-color: beige; /* Change the background color of the alert card */
- }
-.custom-alert .alert-title {
-    color: #0040ff; /* Change the color of the header text */
+    background-color: beige;
 }

@@ -1,18 +1,18 @@
 
 
-<ion-content [fullscreen]="true" id="main-content">
+<ion-content>
   <div class="container">
     <div class="header">
 
-      <div class="logo" slot="start">
+      <!-- <div class="logo" slot="start">
         <ion-avatar class="petscureLogo">
           <img src="assets/petscure-logo.png" alt="">
         </ion-avatar>
-      </div>
+      </div> -->
 
-      <div class="profile" slot="end" (click)="openMenu()">
-        <p>Username</p>
-        <ion-avatar class="profilePic">
+      <div class="profile" slot="end" *ngIf="user$ | async as user">
+        <p>hello, {{user.firstname}}</p>
+        <ion-avatar class="profilePic" routerLink="/profile" >
           <img src="assets/placeholder.jpeg" alt="">
         </ion-avatar>
       </div>
@@ -71,29 +71,29 @@
       </div>
 
       <!-- Display no result -->
-      <!-- <div *ngIf="!(searchdog | async)?.length && search.trim()">
+      <div *ngIf="!(searchdog | async)?.length && search.trim()">
         <p>No results found</p>
-      </div> -->
+      </div>
 
       <!-- Display if dog exist -->
-      <!-- <div *ngIf="searchdog && (searchdog | async)?.length > 0">
-        <div class="pet-container" *ngFor="let dog of (searchdog | async)" [routerLink]="'/dog-details/' + dog.id">
+      <div *ngIf="searchdog && (searchdog | async)?.length > 0">
+        <div class="pet-container" *ngFor="let dog of (searchdog | async)" [routerLink]="'/dog-main/' + dog.id">
           <div class="pet-card">
             <img [src]="dog?.petphoto !== '' ? dog.petphoto : '/assets/palceholder.png'" alt="{{dog.name}}" />
             <p>{{ dog.name }}</p>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- Display orginal view if no search perform -->
-      <!-- <div *ngIf="!(searchdog | async)?.length || !(search.trim())">
-        <div class="pet-container" *ngFor="let dog of dogInfo | async" [routerLink]="'/dog-details/' + dog.id">
+      <div *ngIf="!(searchdog | async)?.length || !(search.trim())">
+        <div class="pet-container" *ngFor="let dog of dogInfo | async" [routerLink]="'/dog-main/' + dog.id">
           <div class="pet-card">
             <img [src]="dog?.petphoto !== '' ? dog.petphoto : '/assets/palceholder.png'" alt="{{dog.name}}" />
             <p>{{ dog.name }}</p>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
 
     <!-- Content for Cats -->
@@ -106,29 +106,29 @@
       </div>
 
       <!-- Display no result -->
-      <!-- <div *ngIf="!(searchcat | async)?.length && search.trim()">
+      <div *ngIf="!(searchcat | async)?.length && search.trim()">
         <p>No results found</p>
-      </div> -->
+      </div>
 
       <!-- Display if cat exist -->
-      <!-- <div *ngIf="searchcat && (searchcat | async)?.length > 0">
-        <div class="pet-container" *ngFor="let cat of (searchcat | async)" [routerLink]="'/cat-details/' + cat.id">
+      <div *ngIf="searchcat && (searchcat | async)?.length > 0">
+        <div class="pet-container" *ngFor="let cat of (searchcat | async)" [routerLink]="'/cat-main/' + cat.id">
           <div class="pet-card">
             <img [src]="cat?.petphoto !== '' ? cat.petphoto : '/assets/palceholder.png'" alt="{{cat.name}}" />
             <p>{{ cat.name }}</p>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- Display orginal view if no search perform -->
-      <!-- <div *ngIf="!(searchcat | async)?.length || !(search.trim())">
-        <div class="pet-container" *ngFor="let cat of catInfo | async" [routerLink]="'/cat-details/' + cat.id">
+      <div *ngIf="!(searchcat | async)?.length || !(search.trim())">
+        <div class="pet-container" *ngFor="let cat of catInfo | async" [routerLink]="'/cat-main/' + cat.id">
           <div class="pet-card">
             <img [src]="cat?.petphoto !== '' ? cat.petphoto : '/assets/palceholder.png'" alt="{{cat.name}}" />
             <p>{{ cat.name }}</p>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </ion-content>

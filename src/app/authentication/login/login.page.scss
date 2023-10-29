@@ -79,7 +79,7 @@ ion-content {
     .fpass {
         display: flex;
         position: relative;
-        justify-content: end;
+        justify-content: flex-end;
 
         p {
           text-decoration: underline; 

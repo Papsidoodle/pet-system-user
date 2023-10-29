@@ -9,5 +9,5 @@ export interface ProfileUser {
     street?: string;
     brgy?: string;
     email?:string;
-    password?:string;
+    emailVerified?: boolean;
 }
