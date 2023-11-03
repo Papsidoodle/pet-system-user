@@ -11,12 +11,48 @@ ion-content {
       width: 100%;
       padding: 1em;
 
+      position: relative;
+
       .icon {
         color: rgb(244, 143, 29);
 
         position: relative;
         top: 0.5rem;
       }
+    }
+
+    .profilePic {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        position: relative;
+
+        top: 0.4rem;
+
+        ion-avatar {
+            position: relative;
+            outline: 1.5px solid #000;
+            background: #fff;
+
+            width: 150px;
+            height: 150px;
+
+        }
+
+        ion-button.addBtn {
+            --background: rgb(255, 0, 0);
+            width: max-content;
+            height: 30px;
+
+            font-size: 14px;
+        }
+    }
+
+    .forms {
+        position: relative;
+        top: 0.4rem;
     }
 
     .createAcc {

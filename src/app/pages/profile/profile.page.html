@@ -2,23 +2,33 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text="" defaultHref="/"></ion-back-button>
+      <ion-title>Profile</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" *ngIf="user$ | async as user">
   <div class="container">
-    <ion-list>
-      <h6>Name</h6>
-      <h2>
-        {{user.firstname}} {{user.lastname}}
-      </h2>
-      <h6>Email</h6>
-      <h2>
-        {{user.email}}
-      </h2>
-    </ion-list>
-    <ion-button (click)="logout()" expand="block" fill="clear" shape="round">
+    <div class="profile">
+      <ion-item lines="none" button>
+        <div class="pic" slot="start">
+          <ion-avatar>
+            <img src="assets/icon/template.png">
+          </ion-avatar>
+        </div>
+  
+        <div class="user">
+          <p class="name">{{user.firstname}} {{user.lastname}}</p>
+          <p class="email">{{user.email}}</p>
+        </div>
+  
+        <div class="arrow" slot="end">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </ion-item>
+    </div>
+
+    <ion-button (click)="logout()" expand="block" fill="outline" shape="round">
       Logout
     </ion-button>
   </div>

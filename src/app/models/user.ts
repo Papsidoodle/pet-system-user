@@ -10,4 +10,5 @@ export interface ProfileUser {
     brgy?: string;
     email?:string;
     emailVerified?: boolean;
+    imgUrl?: string;
 }

@@ -8,6 +8,10 @@ import { UserService } from 'src/app/services/users/user.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { switchMap } from 'rxjs';
 
+// upload image and camera
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -17,6 +21,10 @@ export class RegisterPage implements OnInit {
 
   showPassword: boolean = false;
   credentials : FormGroup | any;
+
+  imgHandler: string;
+  newImg: string;
+  defaultImg = 'assets/icon/template.png';
 
   constructor(
     private auth:AuthService,
@@ -62,6 +70,26 @@ export class RegisterPage implements OnInit {
 
   get password() {
     return this.credentials.get('password');
+  }
+
+  // camera function
+  async takePicture() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: true,
+        saveToGallery: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Prompt,
+        correctOrientation: true
+      });
+
+      this.imgHandler = image.dataUrl;
+      this.newImg = this.imgHandler;
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   ngOnInit() {

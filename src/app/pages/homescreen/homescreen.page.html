@@ -3,7 +3,6 @@
 <ion-content>
   <div class="container">
     <div class="header">
-
       <!-- <div class="logo" slot="start">
         <ion-avatar class="petscureLogo">
           <img src="assets/petscure-logo.png" alt="">
@@ -11,9 +10,9 @@
       </div> -->
 
       <div class="profile" slot="end" *ngIf="user$ | async as user">
-        <p>hello, {{user.firstname}}</p>
+        <p>Hello, {{user.firstname}}</p>
         <ion-avatar class="profilePic" routerLink="/profile" >
-          <img src="assets/placeholder.jpeg" alt="">
+          <img src="assets/icon/template.png" alt="">
         </ion-avatar>
       </div>
     </div>

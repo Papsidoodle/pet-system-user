@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.petscure.app',
+  appId: 'com.petscureuser.app',
   appName: 'PetsCure User',
   webDir: 'www',
   server: {

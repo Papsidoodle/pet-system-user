@@ -1,4 +1,53 @@
 
+ion-content {
+    --background: #f9fbe7;
+}
 .container {
-    padding: 15px;
+    .profile {
+        display: block;
+        align-items: center;
+
+        border-bottom: 1.5px solid #000;
+
+        ion-item { 
+            --background: none;
+
+            --width: 100%;
+            --padding-top: 10px;
+            --padding-bottom: 10px;
+
+            --ripple-color: #4c4c4c;
+
+            .pic {
+                ion-avatar {
+                    width: 90px;
+                    height: 90px;
+
+                    outline: 1.5px solid #000;
+                }
+            }
+
+            .user {
+                vertical-align: middle;
+    
+                .name {
+                    font-size: 20px;
+                    font-weight: bold;
+                    font-family: Tahoma;
+                }
+    
+                .email {
+                    margin-top: -1rem;
+                    font-size: 15px;
+                    font-family: Tahoma;
+                }
+            }
+
+            .arrow {
+                ion-icon {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
 }
