@@ -28,6 +28,7 @@
         centered-slides="true"
         autoplay-delay="2500"
         autoplay-disable-on-interaction="false"
+        [loop]="true"
       >
         <swiper-slide *ngFor="let service of servicesSlide" class="service_slide">
           <p>{{service.title}}</p>
