@@ -99,7 +99,6 @@ export class LoginPage implements OnInit {
       message,
       buttons: ['OK'],
       cssClass: 'custom-alert',
-      translucent: true,
     });
     await alert.present();
   }
