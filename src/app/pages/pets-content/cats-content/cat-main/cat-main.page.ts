@@ -21,6 +21,9 @@ export class CatMainPage implements OnInit {
   ) {}
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.sub1 = this.catservice.getCatInfotById(id)
     .subscribe(petInfo => {

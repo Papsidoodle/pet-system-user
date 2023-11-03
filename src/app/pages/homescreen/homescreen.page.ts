@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AnimationOptions } from 'ngx-lottie';
-import { UserService } from 'src/app/services/users/user.service';
-import { ProfileUser } from 'src/app/models/user';
-import { DogsInfoService } from 'src/app/services/pet/dogs/dogs-info.service';
-import { DogInfo } from 'src/app/services/pet/dogs/dog';
-import { CatsInfoService } from 'src/app/services/pet/cats/cats-info.service';
-import { CatInfo } from 'src/app/services/pet/cats/cat';
 import { Observable } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { CatInfo } from 'src/app/services/pet/cats/cat';
+import { CatsInfoService } from 'src/app/services/pet/cats/cats-info.service';
+import { DogInfo } from 'src/app/services/pet/dogs/dog';
+import { DogsInfoService } from 'src/app/services/pet/dogs/dogs-info.service';
+import { UserService } from 'src/app/services/users/user.service';
 @Component({
   selector: 'app-homescreen',
   templateUrl: './homescreen.page.html',
@@ -28,7 +26,6 @@ export class HomescreenPage implements OnInit {
     private userService: UserService,
     private dogservice: DogsInfoService,
     private catservice: CatsInfoService,
-    private sanitizer: DomSanitizer
   ) {
     this.dogInfo = this.dogservice.getDogInfoAlphabetically();
     this.catInfo = this.catservice.getCatInfoAlphabetically();

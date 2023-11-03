@@ -23,6 +23,9 @@ export class DogMainPage implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.sub1 = this.dogservice.getDogInfotById(id)
     .subscribe(petInfo => {
