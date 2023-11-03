@@ -85,7 +85,7 @@ export class LoginPage implements OnInit {
       if (error.code === 'auth/wrong-password') {
         this.showAlert(
           'Invalid Password!',
-          'Your password is incorrect TANGA.'
+          'Your password is incorrect.'
         );
 
         loading.dismiss();
