@@ -20,7 +20,7 @@
       <!-- Password Input -->
       <ion-item lines="none">
         <ion-label position="floating">Password</ion-label>
-        <ion-input minlength="6" type="{{ showPassword ? 'text' : 'password' }}" formControlName="password"></ion-input>
+        <ion-input minlength="8" type="{{ showPassword ? 'text' : 'password' }}" formControlName="password"></ion-input>
         <ion-icon class="icon" slot="end" [name]="showPassword ? 'eye' : 'eye-off'" (click)="togglePasswordVisibility()"></ion-icon>
         <ion-note *ngIf="(password.dirty || password.touched) && password.errors">Password must be atleast 6 characters.</ion-note>
       </ion-item>
