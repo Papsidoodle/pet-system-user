@@ -2,6 +2,15 @@
 ion-content {
     --background: #f9fbe7;
 }
+
+ion-toolbar {
+    --background: #ef0006;
+
+    ion-back-button {
+        color: #fff;
+    }
+}
+
 .container {
     .profile {
         display: block;
@@ -49,5 +58,24 @@ ion-content {
                 }
             }
         }
+    }
+}
+
+.button-menu{
+    display: block;
+    text-align: center;
+    align-items: center;
+    
+    ion-item {
+        --background: none;
+    }
+    .menus{
+        font-size: 16px;
+        font-weight: bold;
+        font-family: Tahoma;
+        
+    }
+    img{
+        width: 30px;
     }
 }

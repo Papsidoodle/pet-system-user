@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="user$ | async as user">
+  <div class="container">
+    <div class="profile">
+      <ion-item lines="none" button routerLink="/profile-details">
+        <div class="pic" slot="start">
+          <ion-avatar>
+            <img [src]="user.imgUrl" />
+          </ion-avatar>
+        </div>
+
+        <div class="user">
+          <p class="name">{{user.firstname}} {{user.lastname}}</p>
+          <p class="email">{{user.email}}</p>
+        </div>
+
+        <div class="arrow" slot="end">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </ion-item>
+    </div>
+    <div class="button-menu">
+      <ion-item lines="none" button>
+        <img
+          class="icon"
+          src="assets/logo/vitamins.png"
+          slot="start"
+          
+        />
+        <p class="menus">Vitamins</p>
+      </ion-item>
+    </div>
+
+    <div class="button-menu">
+      <ion-item lines="none" button (click)="vaccine()">
+        <img
+          class="icon"
+          src="assets/logo/vaccine.png"
+          slot="start"
+          
+        />
+        <p class="menus">Vaccines</p>
+      </ion-item>
+    </div>
+
+    <div class="button-menu">
+      <ion-item lines="none" button>
+        <img
+          class="icon"
+          src="assets/logo/dangerfood.png"
+          slot="start"
+         
+        />
+        <p class="menus">Dangerous Food</p>
+      </ion-item>
+    </div>
+    
+    <div class="button-menu">
+      <ion-item lines="none" button>
+        <img
+          class="icon"
+          src="assets/logo/corp.png"
+          slot="start"
+          
+        />
+        <p class="menus">Corporation</p>
+      </ion-item>
+    </div>
+    
+    <div class="button-menu">
+      <ion-item lines="none" button>
+        <img
+          class="icon"
+          src="assets/logo/about.png"
+          slot="start"
+          
+        />
+        <p class="menus">About</p>
+      </ion-item>
+    </div>
+
+
+    <ion-button (click)="logout()" expand="block" fill="outline" shape="round">
+      Logout
+    </ion-button>
+  </div>
+</ion-content>

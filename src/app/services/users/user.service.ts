@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
-  collection,
   doc,
   docData,
   Firestore,
-  getDoc,
   setDoc,
-  updateDoc,
+  updateDoc
 } from '@angular/fire/firestore';
-import { filter, from, map, Observable, of, switchMap } from 'rxjs';
+import { from, Observable, of, switchMap } from 'rxjs';
+import { PetInfo } from 'src/app/models/pets';
 import { ProfileUser } from 'src/app/models/user';
 import { AuthService } from '../auth/auth.service';
 @Injectable({
@@ -29,9 +28,26 @@ export class UserService {
     );
   }
 
+  get petInfo$(): Observable<PetInfo | null> {
+    return this.autService.currentUser$.pipe(
+      switchMap((user) => {
+        if (!user?.uid) {
+          return of(null);
+        }
+        const ref = doc(this.firestore, 'pets', user?.uid);
+        return docData(ref) as Observable<PetInfo>;
+      })
+    );
+  }
+
   addUser(user: ProfileUser): Observable<void> {
     const ref = doc(this.firestore, 'users', user.uid);
     return from(setDoc(ref, user));
+  }
+
+  addPet(pet: PetInfo): Observable<void> {
+    const ref = doc(this.firestore, 'pets', pet.uid);
+    return from(setDoc(ref, pet));
   }
 
   updateUser(user: ProfileUser): Observable<void> {

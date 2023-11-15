@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="table">
+
+    <p>cats primary immunization</p>
+    <p class="title">vaccines</p>
+    <table class="cat">
+      <tr *ngFor="let item of vaccines_cat">
+        <td>{{item.td1}}</td>
+        <td>{{item.td2}} </td>
+      </tr>
+    </table> 
+    
+    <p class="title">Boosters</p>
+    <table class="cat">
+      <tr *ngFor="let item of booster_cat">
+        <td>{{item.td1}}</td>
+        <td>{{item.td2}} </td>
+      </tr>
+    </table>
+    <br>
+
+    <p>Dogs primary immunization</p>
+    <p class="title">vaccines</p>
+    <table class="dog">
+      <tr *ngFor="let item of vaccines_dog">
+        <td>{{item.td1}}</td>
+        <td>{{item.td2}} </td>
+      </tr>
+    </table> 
+    
+    <p class="title">Boosters</p>
+    <table class="dog">
+      <tr *ngFor="let item of booster_dog">
+        <td>{{item.td1}}</td>
+        <td>{{item.td2}} </td>
+      </tr>
+    </table>
+  </div>
+  
+</ion-content>

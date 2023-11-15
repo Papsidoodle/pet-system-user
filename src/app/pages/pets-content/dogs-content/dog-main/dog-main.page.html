@@ -16,8 +16,11 @@
 
       <div class="desc">
         <p><b>Life Span:</b></p>
+        {{petInfo.life}}
         <p><b>Avg. Height:</b></p>
+        {{petInfo.height}}
         <p><b>Avg. Weight:</b></p>
+        {{petInfo.weight}}
       </div>
     </div>
   
@@ -30,7 +33,7 @@
   
       <ion-item [routerLink]="'/dog-meds/' + petInfo.id" lines="none">
         <img class="icon" src="assets/logo/meds.png" slot="start">
-        <ion-title>Medicine</ion-title>
+        <ion-title>Common Disease</ion-title>
         <ion-icon name="chevron-forward-circle" slot="end"></ion-icon>
       </ion-item>
   

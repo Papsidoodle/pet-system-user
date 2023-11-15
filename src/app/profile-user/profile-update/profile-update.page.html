@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="#"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user$ | async as user">
+
+  <div class="container">
+    <div class="image-container">
+      <div class="image">
+        <img
+        [src]="user.imgUrl ?? '/assets/image-placeholder.png'"
+      >
+      <ion-button (click)="inputField.click()"expand="block" fill="clear" shape="round">
+        Add Photo
+      </ion-button>
+      <input #inputField hidden type="file" (change)="uploadFile($event, user)" />
+      </div>
+    </div>
+  </div>
+ 
+  
+  <div class="detail-container">
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <p class="name">{{user.firstname}} {{user.middlename}} {{user.lastname}}</p>
+    <div class="card">
+      <ion-item>
+        <ion-label position="stacked">First Name</ion-label>
+        <ion-input type="text" formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Middle Name</ion-label>
+        <ion-input type="text" formControlName="middlename"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Last Name</ion-label>
+        <ion-input type="text" formControlName="lastname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Contact</ion-label>
+        <ion-input type="text" formControlName="contact"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">House No</ion-label>
+        <ion-input type="text" formControlName="houseNo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Street</ion-label>
+        <ion-input type="text" formControlName="street"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Barangay</ion-label>
+        <ion-input type="text" formControlName="brgy"></ion-input>
+      </ion-item>
+  
+  
+      <ion-button expand="block" color="primary" shape="round" type="submit" [disabled]="profileForm.invalid">
+        Update
+      </ion-button>
+    </div>
+  </form>
+  </div>
+
+  
+  
+
+ 
+  
+  
+</ion-content>
+
+<!-- <ion-content *ngIf="user$ | async as user">
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+  <div class="container">
+    <div class="image-container">
+      <div class="image">
+        <img
+        [src]="user.imgUrl ?? '/assets/image-placeholder.png'"
+      />
+      <ion-button (click)="inputField.click()"expand="block" fill="clear" shape="round">
+        Add Photo
+      </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <input #inputField hidden type="file" (change)="uploadFile($event, user)" />
+  
+  <div class="detail-container">
+    <p class="name">{{user.firstname}} {{user.middlename}} {{user.lastname}}</p>
+    <div class="card">
+      <ion-item>
+        <ion-label position="stacked">First Name</ion-label>
+        <ion-input type="text" formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Middle Name</ion-label>
+        <ion-input type="text" formControlName="middlename"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Last Name</ion-label>
+        <ion-input type="text" formControlName="lastname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Contact</ion-label>
+        <ion-input type="text" formControlName="contact"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">House No</ion-label>
+        <ion-input type="text" formControlName="houseNo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Street</ion-label>
+        <ion-input type="text" formControlName="street"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Barangay</ion-label>
+        <ion-input type="text" formControlName="brgy"></ion-input>
+      </ion-item>
+  
+  
+      <ion-button expand="block" color="primary" type="submit" [disabled]="profileForm.invalid">
+        Save
+      </ion-button>
+    </div>
+  </div>
+  
+    
+
+    
+
+  </form>
+
+</ion-content> -->

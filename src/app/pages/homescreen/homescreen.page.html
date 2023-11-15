@@ -1,20 +1,27 @@
 
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="logo" slot="start">
+      <img class="pcLogo" src="assets/petscure-logo.png">
+    </div>
+
+    <div class="header">
+      <p><b>petscure veterinary clinic</b><br>and grooming services</p>
+    </div>
+
+    <div class="profile" slot="end" *ngIf="user$ | async as user" slot="end">
+      <ion-avatar class="profilePic" routerLink="/profile" >
+        <img [src]="user.imgUrl" alt="">
+      </ion-avatar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
 
 <ion-content>
   <div class="container">
-    <div class="header">
-      <!-- <div class="logo" slot="start">
-        <ion-avatar class="petscureLogo">
-          <img src="assets/petscure-logo.png" alt="">
-        </ion-avatar>
-      </div> -->
-
-      <div class="profile" slot="end" *ngIf="user$ | async as user">
-        <p>Hello, {{user.firstname}}</p>
-        <ion-avatar class="profilePic" routerLink="/profile" >
-          <img src="assets/icon/template.png" alt="">
-        </ion-avatar>
-      </div>
+    <div class="pet" *ngIf="pet$ | async as pet">
+      <p style="font-size: 35px;">{{pet.petName}}</p>
     </div>
 
     <div class="slides">
@@ -39,6 +46,7 @@
   </div>
 
   <div class="segment-bg">
+    
     <h3>Pets</h3>
     
     <div class="segment-container">
@@ -86,7 +94,7 @@
       </div>
 
       <!-- Display orginal view if no search perform -->
-      <div *ngIf="!(searchdog | async)?.length || !(search.trim())">
+      <div *ngIf="!(searchdog | async)?.length && !(search.trim())">
         <div class="pet-container" *ngFor="let dog of dogInfo | async" [routerLink]="'/dog-main/' + dog.id">
           <div class="pet-card">
             <img [src]="dog?.petphoto !== '' ? dog.petphoto : '/assets/palceholder.png'" alt="{{dog.name}}" />
@@ -121,7 +129,7 @@
       </div>
 
       <!-- Display orginal view if no search perform -->
-      <div *ngIf="!(searchcat | async)?.length || !(search.trim())">
+      <div *ngIf="!(searchcat | async)?.length && !(search.trim())">
         <div class="pet-container" *ngFor="let cat of catInfo | async" [routerLink]="'/cat-main/' + cat.id">
           <div class="pet-card">
             <img [src]="cat?.petphoto !== '' ? cat.petphoto : '/assets/palceholder.png'" alt="{{cat.name}}" />

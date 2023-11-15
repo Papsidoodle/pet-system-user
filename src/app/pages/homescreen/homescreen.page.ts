@@ -21,6 +21,8 @@ export class HomescreenPage implements OnInit {
   public searchcat: Observable<CatInfo[]>;
   user$ = this.userService.currenUs$;
 
+  pet$ = this.userService.petInfo$;
+
   constructor(
     private menuCtrl: MenuController,
     private userService: UserService,

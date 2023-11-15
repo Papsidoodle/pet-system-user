@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+     <ion-back-button defaultHref="#"></ion-back-button> 
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user$ | async as user">
+  <div class="container">
+    <div class="image-container">
+      <div class="image">
+        <img [src]="user.imgUrl" alt="">
+      </div>
+    </div>
+  </div>
+ 
+ 
+  <div class="detail-container">
+    <p class="name">{{user.firstname}} {{user.middlename}} {{user.lastname}}</p>
+    <p class="number">{{user.email}} </p>
+
+    <div class="card">
+      <p class="address-title">Current Address</p>
+      <p class="address">{{user.houseNo}}, {{user.street}}, {{user.brgy}} {{user.municipality}}, {{user.prov}}</p>
+    </div>
+
+    <button class="myButton" [routerLink]="'/profile-update/' + user.uid">Update Account Information </button>
+  </div>
+
+  
+  
+
+ 
+  
+  
+</ion-content>

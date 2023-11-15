@@ -24,6 +24,7 @@ export class ProfilePage implements OnInit {
 
   // spacing pota
   logout() {
+
     this.authService.logout().subscribe(async () => {
       const loading = this.loadingCtrl.create({
         message: 'Logging out',
@@ -31,13 +32,15 @@ export class ProfilePage implements OnInit {
       });
 
       (await loading).present();
-
       setTimeout(async () => {
         (await loading).dismiss();
-
         this.route.navigate(['/login']);
       }, 1500);
+
     });
   }
   
+  vaccine(){
+    this.route.navigate(['/vaccines']);
+  }
 }

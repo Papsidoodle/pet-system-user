@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs';
 
 // upload image and camera
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 @Component({
   selector: 'app-register',
@@ -21,10 +21,9 @@ export class RegisterPage implements OnInit {
 
   showPassword: boolean = false;
   credentials : FormGroup | any;
-
-  imgHandler: string;
-  newImg: string;
   defaultImg = 'assets/icon/template.png';
+
+  petName: string = '';
 
   constructor(
     private auth:AuthService,
@@ -64,12 +63,24 @@ export class RegisterPage implements OnInit {
     return this.credentials.get('brgy');
   }
 
+  get municipality() {
+    return this.credentials.get('municipality')
+  }
+
+  get province() {
+    return this.credentials.get('prov')
+  }
+
   get email() {
     return this.credentials.get('email');
   }
 
   get password() {
     return this.credentials.get('password');
+  }
+
+  get imgUrl(){
+    return this.credentials.get('imgUrl');
   }
 
   // camera function
@@ -84,9 +95,36 @@ export class RegisterPage implements OnInit {
         correctOrientation: true
       });
 
-      this.imgHandler = image.dataUrl;
-      this.newImg = this.imgHandler;
+      const imgName = new Date().getTime() + '.jpg';
 
+      // storage for the image 
+      const filePath = 'user_photos/' + imgName;
+      const storage = getStorage();
+      const storageRef = ref(storage,filePath)
+
+
+      const response = await fetch(image.dataUrl)
+      const blob = await response.blob();
+
+      const uploadTask = uploadBytes(storageRef,blob)
+
+
+      uploadTask
+      .then((snapshot) =>{
+        //image upload success
+      })
+      .catch((error)=>{
+        console.log('Image upload error: ', error)
+      })
+      .then(async () =>{
+        try {
+          const downloadURL = await getDownloadURL(storageRef);
+
+          this.credentials.patchValue({imgUrl : downloadURL});
+        } catch (error) {
+          console.log('Download url error: ',error)
+        }
+      })
     } catch (error) {
       console.log(error);
     }
@@ -102,13 +140,16 @@ export class RegisterPage implements OnInit {
       houseNo:[''],
       street:['', [Validators.required]],
       brgy:['', [Validators.required]],
+      municipality: ['', [Validators.required]],
+      prov: ['', [Validators.required]],
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(8)]],
+      imgUrl: [''],
 		})
   }
 
   async submit() {
-    const {firstname, middlename, lastname, contact, houseNo, street, brgy, email, password} = this.credentials.value;
+    const {firstname, middlename, lastname, contact, houseNo, street, brgy, municipality, prov, email, password, imgUrl} = this.credentials.value;
 
     const loading = this.loadingCtrl.create({
       message: 'Creating user',
@@ -117,20 +158,25 @@ export class RegisterPage implements OnInit {
 
     (await loading).present();
 
+    const petName = this.petName;
+
     this.auth.signup(email, password).pipe(
       switchMap(({ user: {uid} }) =>
         this.userService.addUser({
-          uid, firstname, middlename, lastname, contact, houseNo, street, brgy, email
-        })
-      ),
+          uid, firstname, middlename, lastname, contact, houseNo, street, brgy, municipality, prov, email, imgUrl
+        }).pipe(
+          switchMap(() => this.userService.addPet({
+            uid: uid,
+          }))
+        )
+      )
     ).subscribe(async () => {
-      
       setTimeout(async () => {
         (await loading).dismiss();
         
         this.credentials.reset();
         this.route.navigate(['/login']);
-      }, 1400);
+      }, 1500);
     });
 
     // ayusin mo na lang yon trycatch lang sakin yon e

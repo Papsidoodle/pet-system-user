@@ -8,6 +8,8 @@ export interface ProfileUser {
     houseNo?: number;
     street?: string;
     brgy?: string;
+    municipality?: string;
+    prov?: string;
     email?:string;
     emailVerified?: boolean;
     imgUrl?: string;

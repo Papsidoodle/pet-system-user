@@ -35,7 +35,6 @@ export class ForgotPassModalPage implements OnInit {
 
   resetPassword() {
     const { email } = this.credentials.value;
-
     this.authService.sendPasswordResetEmail(email).then(async () => {
       const alert = await this.alertController.create({
         header: 'Success',

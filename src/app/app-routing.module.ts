@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['homescreen']);
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: '',
@@ -13,11 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./authentication/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./authentication/register/register.module').then( m => m.RegisterPageModule),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'login',
-    loadChildren: () => import('./authentication/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./authentication/login/login.module').then( m => m.LoginPageModule),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'onboarding',
@@ -33,7 +39,8 @@ const routes: Routes = [
   },
   {
     path: 'homescreen',
-    loadChildren: () => import('./pages/homescreen/homescreen.module').then( m => m.HomescreenPageModule)
+    loadChildren: () => import('./pages/homescreen/homescreen.module').then( m => m.HomescreenPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'cat-main/:id',
@@ -85,11 +92,32 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  },  {
-    path: 'verify-email',
-    loadChildren: () => import('./authentication/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+    loadChildren: () => import('./profile-user/profile/profile.module').then( m => m.ProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'verify-email',
+    loadChildren: () => import('./authentication/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'profile-details',
+    loadChildren: () => import('./profile-user/profile-details/profile-details.module').then( m => m.ProfileDetailsPageModule)
+  },
+  {
+    path: 'profile-update/:id',
+    loadChildren: () => import('./profile-user/profile-update/profile-update.module').then( m => m.ProfileUpdatePageModule)
+  },  {
+    path: 'vaccines',
+    loadChildren: () => import('./pages/vaccines/vaccines.module').then( m => m.VaccinesPageModule)
+  },
+  {
+    path: 'corporation',
+    loadChildren: () => import('./pages/corporation/corporation.module').then( m => m.CorporationPageModule)
+  },
+
+
+
 
 
 ];
