@@ -30,6 +30,8 @@ export class ProfileUpdatePage implements OnInit {
     houseNo:[],
     street:[''],
     brgy:[''],
+    municipality:[''],
+    prov:['']
   });
 
   constructor(

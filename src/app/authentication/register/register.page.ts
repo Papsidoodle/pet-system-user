@@ -23,8 +23,6 @@ export class RegisterPage implements OnInit {
   credentials : FormGroup | any;
   defaultImg = 'assets/icon/template.png';
 
-  petName: string = '';
-
   constructor(
     private auth:AuthService,
     private userService:UserService,
@@ -158,15 +156,13 @@ export class RegisterPage implements OnInit {
 
     (await loading).present();
 
-    const petName = this.petName;
-
     this.auth.signup(email, password).pipe(
       switchMap(({ user: {uid} }) =>
         this.userService.addUser({
           uid, firstname, middlename, lastname, contact, houseNo, street, brgy, municipality, prov, email, imgUrl
         }).pipe(
           switchMap(() => this.userService.addPet({
-            uid: uid,
+            uid: uid
           }))
         )
       )
