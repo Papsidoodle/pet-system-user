@@ -1,54 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
-import { AnimationOptions } from 'ngx-lottie';
-import { Observable } from 'rxjs';
-import { CatInfo } from 'src/app/services/pet/cats/cat';
-import { CatsInfoService } from 'src/app/services/pet/cats/cats-info.service';
-import { DogInfo } from 'src/app/services/pet/dogs/dog';
-import { DogsInfoService } from 'src/app/services/pet/dogs/dogs-info.service';
 import { UserService } from 'src/app/services/users/user.service';
+import { Subscription } from 'rxjs';
+import { PetsInfo } from 'src/app/models/pets';
+// import { PetsAppointment } from 'src/app/models/pets-appointment';
+import { PetsInfoService } from 'src/app/services/pet/pets/pets-info.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileUser } from 'src/app/models/user';
 @Component({
   selector: 'app-homescreen',
   templateUrl: './homescreen.page.html',
   styleUrls: ['./homescreen.page.scss'],
 })
 export class HomescreenPage implements OnInit {
-  selectedSegment: string = '1';
-  public search: string = '';
-  public dogInfo: Observable<DogInfo[]>;
-  public catInfo: Observable<CatInfo[]>;
-  public searchdog: Observable<DogInfo[]>;
-  public searchcat: Observable<CatInfo[]>;
   user$ = this.userService.currenUs$;
 
-  pet$ = this.userService.petInfo$;
+  public pet: PetsInfo[];
+
+  userSub: Subscription;
+  petSub: Subscription;
+  petAppointmentsSub: Subscription;
+  petInfo: Subscription;
+
+  userId: any;
 
   constructor(
-    private menuCtrl: MenuController,
     private userService: UserService,
-    private dogservice: DogsInfoService,
-    private catservice: CatsInfoService,
-  ) {
-    this.dogInfo = this.dogservice.getDogInfoAlphabetically();
-    this.catInfo = this.catservice.getCatInfoAlphabetically();
-  }
-
-  openMenu() {
-    this.menuCtrl.open('menu');
-  }
-
-  lottieoptionsdog: AnimationOptions = {
-    path: 'assets/json/dog.json',
-  };
-
-  lottieoptionscat: AnimationOptions = {
-    path: 'assets/json/cat.json',
-  };
-
-  segmentChanged() {
-    // You can perform actions when the segment changes here if needed.
-    // For example, fetch data based on the selected segment.
-  }
+    private petsService: PetsInfoService
+  ) { }
 
   servicesSlide: any[] = [
     { title: 'Vaccination', img: '/assets/Services/vacc.jpg' },
@@ -65,31 +43,28 @@ export class HomescreenPage implements OnInit {
     { title: 'Urine Analysis', img: '/assets/Services/urine.jpg' },
     { title: 'Complete Blood Chemistry', img: '/assets/Services/complete.jpg' },
   ];
+  
+  ngOnInit() {
+    this.userService.currenUs$.subscribe((res) => {
+      const uid = res.uid;
 
-  // search
-  onDogSearch() {
-    const searchlower = this.search.trim().toLowerCase();
-    console.log('Search: ', searchlower);
-
-    if (searchlower !== '') {
-      this.searchdog = this.dogservice.searchDog(searchlower);
-    } else {
-      this.searchdog = null;
-      this.search = '';
-    }
+      (
+        this.userSub = this.userService
+          .getUsersInfoById(uid)
+          .subscribe((userInfo) => {
+            this.userId = userInfo;
+          }
+        )
+      ),
+      (
+        this.petInfo = this.petsService
+          .getUserPet(uid)
+          .subscribe((pets: any) => {
+            console.log(pets);
+            this.pet = pets;
+          }
+        )
+      )
+    });
   }
-
-  onCatSearch() {
-    const searchlower = this.search.trim().toLowerCase();
-    console.log('Search: ', searchlower);
-
-    if (searchlower !== '') {
-      this.searchcat = this.catservice.searchCat(searchlower);
-    } else {
-      this.searchcat = null;
-      this.search = '';
-    }
-  }
-
-  ngOnInit() {}
 }

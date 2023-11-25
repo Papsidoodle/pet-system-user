@@ -8,12 +8,7 @@ import { HomescreenPageRoutingModule } from './homescreen-routing.module';
 
 import { HomescreenPage } from './homescreen.page';
 
-import {LottieModule} from 'ngx-lottie';
-import player from 'lottie-web';
 
-export function playerFactory(){
-  return player
-}
 
 @NgModule({
   imports: [
@@ -21,7 +16,6 @@ export function playerFactory(){
     FormsModule,
     IonicModule,
     HomescreenPageRoutingModule,
-    LottieModule.forRoot({ player: playerFactory})
   ],
   declarations: [HomescreenPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

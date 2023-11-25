@@ -1,14 +1,16 @@
 
-export interface PetInfo {
-    uid?: string;
-    petId?: string,
+export interface PetsInfo {
+    petId?: string;
     petName?: string;
     age?: number;
-    bday?: any;
-    ht?: number;
-    wt?: number;
+    birthday?: any;
+    height?: number;
+    weight?: number;
+    kind?: string;
     breed?: string;
     color?: string;
-    chipNo?: number;
     gender?: string;
-}
+    chipNo?: number;
+    petImg?: string;
+    uid?: string;
+  }

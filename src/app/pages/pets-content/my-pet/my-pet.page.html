@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar *ngFor="let pet of pet">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{pet.petName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="info" *ngFor="let pet of pet">
+    <div class="petImg">
+      <img [src]="pet.petImg" />
+    </div>
+
+    <div class="desc">
+      <div>
+        <p>Age</p>
+        <p class="labels">{{pet.age}}</p>
+      </div>
+
+      <div>
+        <p>Birthday</p>
+        <p class="labels">{{pet.birthday}}</p>
+      </div>
+
+      <div>
+        <p>Height (cm)</p>
+        <p class="labels">{{pet.height}}</p>
+      </div>
+
+      <div>
+        <p>Weight (kg)</p>
+        <p class="labels">{{pet.weight}}</p>
+      </div>
+
+      <div>
+        <p>Breed</p>
+        <p class="labels">{{pet.breed}}</p>
+      </div>
+
+      <div>
+        <p>Color</p>
+        <p class="labels">{{pet.color}}</p>
+      </div>
+
+      <div>
+        <p>Microchip No.</p>
+        <p class="labels">{{pet.chipNo}}</p>
+      </div>
+
+      <div>
+        <p>Gender</p>
+        <p class="labels">{{pet.gender}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="appointment-container" *ngFor="let pet of pet">
+    <button class="appointment-buttons">Schedule of Appointment</button>
+    <button
+      class="appointment-buttons"
+      [routerLink]="['/schedule/' + pet.petId + '/0']"
+    >
+      Tick and Flea / Heartworm Preventative
+    </button>
+
+    <button
+      class="appointment-buttons"
+      [routerLink]="['/schedule/' + pet.petId + '/1']"
+    >
+      Deworming Schedule
+    </button>
+
+    <button
+      class="appointment-buttons"
+      [routerLink]="['/schedule/' + pet.petId + '/2']"
+    >
+      Vaccination Schedule
+    </button>
+
+    <button class="appointment-buttons">Medical History</button>
+  </div>
+</ion-content>

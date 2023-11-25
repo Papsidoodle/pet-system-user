@@ -107,13 +107,22 @@ const routes: Routes = [
   {
     path: 'profile-update/:id',
     loadChildren: () => import('./profile-user/profile-update/profile-update.module').then( m => m.ProfileUpdatePageModule)
-  },  {
+  },
+  {
     path: 'vaccines',
     loadChildren: () => import('./pages/vaccines/vaccines.module').then( m => m.VaccinesPageModule)
   },
   {
     path: 'corporation',
     loadChildren: () => import('./pages/corporation/corporation.module').then( m => m.CorporationPageModule)
+  },
+  {
+    path: 'pet-gallery',
+    loadChildren: () => import('./pages/pets-content/pet-gallery/pet-gallery.module').then( m => m.PetGalleryPageModule)
+  },
+  {
+    path: 'my-pet/:uid/:petId',
+    loadChildren: () => import('./pages/pets-content/my-pet/my-pet.module').then( m => m.MyPetPageModule)
   },
 
 

@@ -1,7 +1,18 @@
+
+ion-toolbar {
+    --background: #ef0006;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --padding-top: 2px;
+    --padding-bottom: 2px;
+
+    color: #fff;
+}
+
 .container {
     width: 100%;
     height: 150px;
-    background-color: rgb(8, 0, 255);
+    background-color: #ca4449;
     position: relative;
 }
 
@@ -20,6 +31,8 @@
     border-radius: 50%;
     position: relative; /* Use relative position for the image */
     bottom: -50%;
+
+    background: #fff;
 }
 
 .image img {

@@ -18,12 +18,8 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf="user$ | async as user">
   <div class="container">
-    <!-- <div class="pet" *ngIf="pet$ | async as pet">
-      <p style="font-size: 35px;">{{pet.petName}}</p>
-    </div> -->
-
     <div class="slides">
       <p>Services Offered</p>
 
@@ -43,100 +39,22 @@
         </swiper-slide> 
       </swiper-container>
     </div>
-  </div>
-
-  <div class="segment-bg">
     
-    <h3>Pets</h3>
-    
-    <div class="segment-container">
-      <ion-segment
-        [(ngModel)]="selectedSegment"
-        (ionChange)="segmentChanged()"
-        class="custom-segment"
-      >
-        <ion-segment-button value="1">
-          <div class="lottie-container">
-            <ng-lottie [options]='lottieoptionsdog'></ng-lottie>
-          </div>
-        </ion-segment-button>
-      
-        <ion-segment-button value="2">
-          <div class="lottie-container">
-            <ng-lottie [options]='lottieoptionscat'></ng-lottie>
-          </div>
-        </ion-segment-button>
-      </ion-segment>
+    <div class="label">
+      <h2>My Pet</h2>
     </div>
 
-    <!-- Content for Dogs -->
-    <div *ngIf="selectedSegment === '1'">
-
-      <div class="stickybar">
-        <div class="input-wrapper">
-          <input type="text" placeholder="Search..." name="text" class="input" [(ngModel)]="search" (input)="onDogSearch()" autocomplete="off">
-        </div>
-      </div>
-
-      <!-- Display no result -->
-      <div *ngIf="!(searchdog | async)?.length && search.trim()">
-        <p>No results found</p>
-      </div>
-
-      <!-- Display if dog exist -->
-      <div *ngIf="searchdog && (searchdog | async)?.length > 0">
-        <div class="pet-container" *ngFor="let dog of (searchdog | async)" [routerLink]="'/dog-main/' + dog.id">
-          <div class="pet-card">
-            <img [src]="dog?.petphoto !== '' ? dog.petphoto : '/assets/palceholder.png'" alt="{{dog.name}}" />
-            <p>{{ dog.name }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Display orginal view if no search perform -->
-      <div *ngIf="!(searchdog | async)?.length && !(search.trim())">
-        <div class="pet-container" *ngFor="let dog of dogInfo | async" [routerLink]="'/dog-main/' + dog.id">
-          <div class="pet-card">
-            <img [src]="dog?.petphoto !== '' ? dog.petphoto : '/assets/palceholder.png'" alt="{{dog.name}}" />
-            <p>{{ dog.name }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Content for Cats -->
-    <div *ngIf="selectedSegment === '2'">
-
-      <div class="stickybar">
-        <div class="input-wrapper">
-          <input type="text" placeholder="Search..." name="text" class="input" [(ngModel)]="search" (input)="onCatSearch()" autocomplete="off">
-        </div>
-      </div>
-
-      <!-- Display no result -->
-      <div *ngIf="!(searchcat | async)?.length && search.trim()">
-        <p>No results found</p>
-      </div>
-
-      <!-- Display if cat exist -->
-      <div *ngIf="searchcat && (searchcat | async)?.length > 0">
-        <div class="pet-container" *ngFor="let cat of (searchcat | async)" [routerLink]="'/cat-main/' + cat.id">
-          <div class="pet-card">
-            <img [src]="cat?.petphoto !== '' ? cat.petphoto : '/assets/palceholder.png'" alt="{{cat.name}}" />
-            <p>{{ cat.name }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Display orginal view if no search perform -->
-      <div *ngIf="!(searchcat | async)?.length && !(search.trim())">
-        <div class="pet-container" *ngFor="let cat of catInfo | async" [routerLink]="'/cat-main/' + cat.id">
-          <div class="pet-card">
-            <img [src]="cat?.petphoto !== '' ? cat.petphoto : '/assets/palceholder.png'" alt="{{cat.name}}" />
-            <p>{{ cat.name }}</p>
-          </div>
-        </div>
-      </div>
+    <div class="pets">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let pets of pet">
+            <ion-card button [routerLink]="['/my-pet/' + user.uid + '/' + pets.petId]">
+              <img [src]="pets.petImg" height="150px">
+              <p class="card-text">{{pets.petName}}</p>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 </ion-content>
