@@ -89,9 +89,9 @@ export class ProfileUpdatePage implements OnInit {
             color: 'success',
             position: 'bottom'
           }).then(toast => {
-            toast.present();
             setTimeout(() => {
               loading.dismiss();
+              toast.present();
               this.route.navigate(['profile-details']);
             }, 1500)
           });
