@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{header}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Weight (kg)</th>
+        <th>Vaccine Brand</th>
+        <th>Veterinarian</th>
+      </tr>
+
+      <tr
+        *ngFor="let sched of apps"
+        [routerLink]="'/schedule/'+ userId + '/' + sched.petId + '/' + sched.appointmentId"
+      >
+        <td>{{sched.appointmentDate}}</td>
+
+        <td>{{sched.weight}}</td>
+
+        <td>
+          <img [src]="sched.brandImg" />
+        </td>
+
+        <td>{{sched.vetName}}</td>
+      </tr>
+    </table>
+  </div>
+</ion-content>

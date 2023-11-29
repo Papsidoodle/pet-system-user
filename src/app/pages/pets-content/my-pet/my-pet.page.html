@@ -56,27 +56,65 @@
     </div>
   </div>
 
+  <!-- <ion-button class="appointment-buttons" (click)="medHistory()"
+  >Medical History</ion-button
+> -->
   <div class="appointment-container" *ngFor="let pet of pet">
-    <button class="appointment-buttons">Schedule of Appointment</button>
+    <!-- Hidden List para custom ugn Design dun sa schedule of appointments -->
+    <ion-item>
+      <ion-list class="">
+        <ion-select
+          id="select"
+          aria-label="schedules"
+          label="Schedule of Appointments"
+          labelPlacement="stacked"
+          okText=""
+          cancelText=""
+          (ionChange)="goToAppointment($event)"
+        >
+          <ion-select-option
+            *ngFor="let appointments of apps"
+            value="{{appointments.appointmentId}}"
+          >
+            {{appointmentTypes[appointments.appointmentType]}}
+            {{appointments.appointmentDate}}
+          </ion-select-option>
+        </ion-select>
+      </ion-list>
+    </ion-item>
     <button
       class="appointment-buttons"
-      [routerLink]="['/schedule/' + pet.petId + '/0']"
+      [routerLink]="['/schedule/' + user.uid + '/' + pet.petId + '/' + 0]"
+    >
+      AntiRabies Appointments
+    </button>
+
+    <button
+      class="appointment-buttons"
+      [routerLink]="['/schedule/' + user.uid + '/' + pet.petId + '/' + 1]"
+    >
+      Deworming Appointments
+    </button>
+
+    <button
+      class="appointment-buttons"
+      [routerLink]="['/schedule/' + user.uid + '/' + pet.petId + '/' + 2]"
+    >
+      Kennel Cough Appointments
+    </button>
+
+    <button
+      class="appointment-buttons"
+      [routerLink]="['/schedule/' + user.uid + '/' + pet.petId + '/' + 3]"
     >
       Tick and Flea / Heartworm Preventative
     </button>
 
     <button
       class="appointment-buttons"
-      [routerLink]="['/schedule/' + pet.petId + '/1']"
+      [routerLink]="['/schedule/' + user.uid + '/' + pet.petId + '/' + 4]"
     >
-      Deworming Schedule
-    </button>
-
-    <button
-      class="appointment-buttons"
-      [routerLink]="['/schedule/' + pet.petId + '/2']"
-    >
-      Vaccination Schedule
+      5in1 / 6in1 / 8in1
     </button>
 
     <button class="appointment-buttons">Medical History</button>

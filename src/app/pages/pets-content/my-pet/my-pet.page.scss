@@ -1,122 +1,125 @@
-
 ion-toolbar {
-    --background: #ef0006;
-    --padding-start: 10px;
-    --padding-end: 10px;
-    --padding-top: 2px;
-    --padding-bottom: 2px;
+  --background: #ef0006;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 2px;
+  --padding-bottom: 2px;
 
-    color: #fff;
+  color: #fff;
 }
 
+.select-alertless {
+  .alert-button-group {
+    display: none;
+  }
+}
 .info {
-    padding: 15px;
+  padding: 15px;
 }
 
 .petImg {
+  border-radius: 10px;
+
+  img {
     border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+  }
 
-    img {
-        border-radius: 10px;
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .desc {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  text-align: center;
 }
 
-.labels{
-    font-weight: normal;
-    font-size: 12px;
+.labels {
+  font-weight: normal;
+  font-size: 12px;
 }
 
 .appointment-container {
-    display:grid;
-    grid-template: 1;
-    grid-template-rows: auto;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    text-align: center;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    padding-left: 5em;
-    padding-right: 5em;
-    background-color: #599bb3;
+  display: grid;
+  grid-template: 1;
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  text-align: center;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-left: 5em;
+  padding-right: 5em;
+  background-color: #599bb3;
 }
 
 .appointment-buttons {
-    background-color: #ef0006;
-    color: white;
-    height: 3em;
-    border-radius: 1em;
-    font-size: large;
-    font-weight: bold;
+  background-color: #ef0006;
+  color: white;
+  height: 3em;
+  border-radius: 1em;
+  font-size: large;
+  font-weight: bold;
 }
 
 .container {
-    padding: 15px;
+  padding: 15px;
 
-    .button{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        margin-bottom: 1rem;
+    margin-bottom: 1rem;
 
-        .myButton {
-            box-shadow: 3px 4px 0px 0px #276873;
-            background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-            background-color:#599bb3;
-            border-radius:18px;
-            border:1px solid #29668f;
-            cursor:pointer;
-            color:#ffffff;
-            font-family:Arial;
-            font-size:17px;
-            padding:7px 25px;
-            text-decoration:none;
-            text-shadow:0px 1px 0px #3d768a;
-        }
-
-        .myButton:hover {
-            background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-            background-color:#408c99;
-        }
-
-        .myButton:active {
-            position:relative;
-            top:1px;
-        }
-    }
-    
-
-    ion-item {
-        --background: #ececec;
-
-        border-radius: 10px;
-
-        margin-bottom: 1rem;
-
-        &:hover {
-          outline: 2px solid rgb(203, 181, 35);
-        }
+    .myButton {
+      box-shadow: 3px 4px 0px 0px #276873;
+      background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+      background-color: #599bb3;
+      border-radius: 18px;
+      border: 1px solid #29668f;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: Arial;
+      font-size: 17px;
+      padding: 7px 25px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #3d768a;
     }
 
-    .measurement {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-
-        .wt{
-            margin-left: 0.5rem;
-        }
+    .myButton:hover {
+      background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+      background-color: #408c99;
     }
+
+    .myButton:active {
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  ion-item {
+    --background: #ececec;
+
+    border-radius: 10px;
+
+    margin-bottom: 1rem;
+
+    &:hover {
+      outline: 2px solid rgb(203, 181, 35);
+    }
+  }
+
+  .measurement {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .wt {
+      margin-left: 0.5rem;
+    }
+  }
 }

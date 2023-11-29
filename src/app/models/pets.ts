@@ -14,3 +14,14 @@ export interface PetsInfo {
     petImg?: string;
     uid?: string;
   }
+
+  export interface PetsAppointment {
+    appointmentType?: number;
+    appointmentDate?: any;
+    vetName?: string;
+    weight?: number;
+    brandImg?: string;
+    petId?: string;
+    appointmentId?: string;
+  }
+  

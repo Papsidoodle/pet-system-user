@@ -124,6 +124,11 @@ const routes: Routes = [
     path: 'my-pet/:uid/:petId',
     loadChildren: () => import('./pages/pets-content/my-pet/my-pet.module').then( m => m.MyPetPageModule)
   },
+  {
+    path: 'schedule/:uid/:petId/:appointmentType',
+    loadChildren: () => import('./pages/schedule/schedule.module').then( m => m.SchedulePageModule)
+  },
+
 
 
 
