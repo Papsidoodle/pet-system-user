@@ -8,6 +8,7 @@ import { PetsInfoService } from 'src/app/services/pet/pets/pets-info.service';
 import { ScheduleService } from 'src/app/services/schedule/schedule.service';
 import { UserService } from 'src/app/services/users/user.service';
 import { formatDate } from '../../schedule/schedule.page';
+import { MedicalHistoryService, PetMedicalHistory } from 'src/app/services/medical-history/medical-history.service';
 
 const appointmentTypes = [
   'AntiRabies Schedule',
@@ -34,6 +35,10 @@ export class MyPetPage implements OnInit {
   public appointmentTypes = appointmentTypes;
   public apps: PetsAppointment[];
   public selectedAppointment: PetsAppointment;
+  
+  medicalHistories: PetMedicalHistory[];
+  medHistorySub: Subscription; 
+  
   appointments: Subscription;
   default = 'assets/palceholder.png'
   constructor(
@@ -43,6 +48,7 @@ export class MyPetPage implements OnInit {
     private actRoute: ActivatedRoute,
     private scheduleService: ScheduleService,
     private petService: PetsInfoService,
+    private medService: MedicalHistoryService,
   ) { }
 
   ngOnInit() {
@@ -75,6 +81,13 @@ export class MyPetPage implements OnInit {
       this.pet = pet;
       console.log(pet);
     })
+
+    this.medHistorySub = this.medService.getMedicalHistoryByPetId(uid,petId).subscribe((medicalHistory) => {
+      medicalHistory.forEach((data) => {
+        data.medicalHistoryDate = formatDate(data.medicalHistoryDate.toDate());
+        this.medicalHistories = medicalHistory
+      })
+    })
   }
 
   goToAppointment(event: any) {
@@ -82,5 +95,9 @@ export class MyPetPage implements OnInit {
     this.router.navigate([route]);
   }
 
+  goToMedicalHistory(event:any) {
+    const route = `/medical-history/${this.user.uid}/${this.pet[0].petId}/${event.target.value}`
+    this.router.navigate([route]);
+  }
 
 }

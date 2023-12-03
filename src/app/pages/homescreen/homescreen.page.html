@@ -29,17 +29,16 @@
         pagination-clickable="true"
         space-betweenw="30"
         centered-slides="true"
-        autoplay-delay="2500"
+        autoplay-delay="2000"
         autoplay-disable-on-interaction="false"
         [loop]="true"
       >
-        <swiper-slide *ngFor="let service of servicesSlide" class="service_slide">
-          <p>{{service.title}}</p>
+        <swiper-slide *ngFor="let service of pictures" class="service_slide">
           <img src="{{service.img}}" alt="">
-        </swiper-slide> 
+        </swiper-slide>
       </swiper-container>
     </div>
-    
+
     <div class="label">
       <h2>My Pet</h2>
     </div>

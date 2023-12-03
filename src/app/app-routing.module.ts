@@ -128,11 +128,10 @@ const routes: Routes = [
     path: 'schedule/:uid/:petId/:appointmentType',
     loadChildren: () => import('./pages/schedule/schedule.module').then( m => m.SchedulePageModule)
   },
-
-
-
-
-
+  {
+    path: 'medical-history/:uid/:petId/:medicalHistoryId',
+    loadChildren: () => import('./pages/pets-content/medical-history/medical-history.module').then( m => m.MedicalHistoryPageModule)
+  },
 
 ];
 
