@@ -87,6 +87,12 @@ ion-content {
         }
     }
 
+    .captcha {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .buttons {
       .login {
 

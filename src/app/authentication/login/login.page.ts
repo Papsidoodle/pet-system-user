@@ -9,6 +9,7 @@ import {
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ForgotPassModalPage } from '../forgot-pass-modal/forgot-pass-modal.page';
 import { firstValueFrom } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,6 +18,7 @@ import { firstValueFrom } from 'rxjs';
 export class LoginPage implements OnInit {
   credentials: FormGroup | any;
   showPassword: boolean = false;
+  captchaValid: boolean = false;
   constructor(
     private fb: FormBuilder,
     private loadingController: LoadingController,
@@ -41,6 +43,15 @@ export class LoginPage implements OnInit {
   }
   get password() {
     return this.credentials.get('password');
+  }
+
+  get sitekey() {
+    return environment.recaptcha.login;
+  }
+
+  captchaResolved(event: any) {
+    console.log('Captcha resolved', event);
+    this.captchaValid = true;
   }
 
   ngOnInit() {

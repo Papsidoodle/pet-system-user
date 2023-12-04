@@ -11,4 +11,8 @@ export const environment = {
     measurementId: 'G-B3DLN3N3LM',
   },
 
+  recaptcha: {
+    login: '6LeLdiUpAAAAAHeJaEUo8k_5bIXqCioGSNcAiMpi'
+  }
+
 };
