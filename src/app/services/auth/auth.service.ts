@@ -26,7 +26,15 @@ export class AuthService {
 
   // signup
   signup(email: string, password: string): Observable<UserCredential> {
-    return from(createUserWithEmailAndPassword(this.auth, email, password));
+    const user = from(createUserWithEmailAndPassword(this.auth, email, password).then((result)=>{
+      sendEmailVerification(this.auth.currentUser).then((fukit)=>{
+        console.log(fukit);
+      }).catch((err)=>{
+        console.log(err);
+      })
+      return result;
+    }));
+    return user;
   }
 
   // login
@@ -44,14 +52,20 @@ export class AuthService {
   }
 
   // Send email verification for the current user
+  
   sendEmailVerification(): Observable<any> {
     const user = this.auth.currentUser;
+    console.log(user);
     return of(user).pipe(
       concatMap((user) => {
         if (!user) {
           throw new Error('Not Authenticated');
         }
-        return sendEmailVerification(user);
+        return sendEmailVerification(user).then((test) => {
+          console.log('email sent');
+        }).catch((err) => {
+          console.log(err);
+        });
       })
     );
   }

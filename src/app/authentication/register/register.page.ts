@@ -169,7 +169,7 @@ export class RegisterPage implements OnInit {
     ).subscribe(async () => {
       setTimeout(async () => {
         (await loading).dismiss();
-        
+        // this.auth.sendEmailVerification();
         this.credentials.reset();
         this.route.navigate(['/login']);
       }, 1500);

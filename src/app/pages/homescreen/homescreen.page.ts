@@ -6,7 +6,7 @@ import { PetsInfoService } from 'src/app/services/pet/pets/pets-info.service';
 
 export interface imgInterface {
   img: string;
-  id: string;
+  imgId: string;
 }
 
 @Component({
@@ -65,11 +65,12 @@ export class HomescreenPage implements OnInit {
       .getAnnoucements()
       .subscribe((annoucements) => {
         this.pictures = annoucements;
+        
         const images = this.pictures.map((picture) => {
-          return { img: picture.img };
+          return { img: picture.img, imgId:picture.imgId };
         });
+
         this.servicesSlide.push(...images);
-        console.log(this.servicesSlide);
       });
   }
 }
