@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit {
     private route: Router,
   ) { }
 
-  // get the form value 
+  // get the form value
   get firstname() {
     return this.credentials.get('firstname');
   }
@@ -95,7 +95,7 @@ export class RegisterPage implements OnInit {
 
       const imgName = new Date().getTime() + '.jpg';
 
-      // storage for the image 
+      // storage for the image
       const filePath = 'user_photos/' + imgName;
       const storage = getStorage();
       const storageRef = ref(storage,filePath)
@@ -169,7 +169,7 @@ export class RegisterPage implements OnInit {
     ).subscribe(async () => {
       setTimeout(async () => {
         (await loading).dismiss();
-        // this.auth.sendEmailVerification();
+        this.auth.logout();
         this.credentials.reset();
         this.route.navigate(['/login']);
       }, 1500);

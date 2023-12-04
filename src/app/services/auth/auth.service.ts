@@ -12,6 +12,7 @@ import {
 import { updateProfile } from 'firebase/auth';
 import { Observable, concatMap, from, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -19,17 +20,18 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
   constructor(
     private auth: Auth,
-    private fireAuth: AngularFireAuth
-  ) {}
+    private fireAuth: AngularFireAuth,
+    private alertController: AlertController,
+  ) { }
 
   currentUser$ = authState(this.auth);
 
   // signup
   signup(email: string, password: string): Observable<UserCredential> {
-    const user = from(createUserWithEmailAndPassword(this.auth, email, password).then((result)=>{
-      sendEmailVerification(this.auth.currentUser).then((fukit)=>{
+    const user = from(createUserWithEmailAndPassword(this.auth, email, password).then((result) => {
+      sendEmailVerification(this.auth.currentUser).then((fukit) => {
         console.log(fukit);
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log(err);
       })
       return result;
@@ -39,9 +41,24 @@ export class AuthService {
 
   // login
   login(email: string, password: string): Observable<any> {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+    const observable = from(signInWithEmailAndPassword(this.auth, email, password).then((result) => {
+      if (!result.user?.emailVerified) {
+        this.showAlert('Email Verification', 'Please verify your email address. A verification link has been sent to your email address.');
+        this.logout();
+      }
+    }));
+    return observable;
   }
 
+  async showAlert(header: any, message: any) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+      cssClass: 'custom-alert',
+    });
+    await alert.present();
+  }
   logout(): Observable<any> {
     return from(this.auth.signOut());
   }
@@ -52,7 +69,7 @@ export class AuthService {
   }
 
   // Send email verification for the current user
-  
+
   sendEmailVerification(): Observable<any> {
     const user = this.auth.currentUser;
     console.log(user);
