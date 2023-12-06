@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/users/user.service';
 
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { switchMap } from 'rxjs';
 
 // upload image and camera
@@ -27,6 +27,7 @@ export class RegisterPage implements OnInit {
     private auth:AuthService,
     private userService:UserService,
     private fb : FormBuilder,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toast : ToastController,
     private route: Router,
@@ -173,9 +174,28 @@ export class RegisterPage implements OnInit {
         this.credentials.reset();
         this.route.navigate(['/login']);
       }, 1500);
+    }, async error => {
+      if (error.code === 'auth/email-already-in-use') {
+        this.showAlert(
+          'Email Exists!',
+          'The provided email is used by another account.'
+        );
+
+        (await loading).dismiss();
+      }
     });
 
     // ayusin mo na lang yon trycatch lang sakin yon e
+  }
+
+  async showAlert(header: any, message: any) {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      buttons: ['OK'],
+      cssClass: 'custom-alert',
+    });
+    await alert.present();
   }
 
   // navigate to login page
