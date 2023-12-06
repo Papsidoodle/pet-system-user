@@ -20,8 +20,8 @@
 
 <ion-content *ngIf="user$ | async as user">
   <div class="container">
-    <div class="slides">
-      <p>Services Offered</p>
+    <div class="slides" *ngIf="pictures.length !== 0">
+      <p>Annoucements</p>
 
       <swiper-container
         class="swiper-container"

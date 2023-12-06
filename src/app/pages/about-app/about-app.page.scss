@@ -1,0 +1,33 @@
+
+ion-toolbar {
+    --background: #ef0006;
+
+    color: #fff;
+}
+
+.container {
+    padding: 15px;
+
+    font-family: Tahoma;
+    font-size: 16px;
+
+    p.text {
+        text-align: justify;
+        text-indent: 15px;
+
+        line-height: 1.5;
+    }
+
+    p.inquiry {
+        text-align: justify;
+        line-height: 1.5;
+    }
+
+    .list {
+        line-height: 1.5;
+
+        a {
+            color: #ef0006;
+        }
+    }
+}

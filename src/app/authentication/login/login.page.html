@@ -29,9 +29,13 @@
         <p (click)="openModal()">Forgot password?</p>
       </div>
 
+      <div class="captcha" *ngIf="credentials.valid">
+        <re-captcha (resolved)="captchaResolved($event)" [siteKey]="sitekey"></re-captcha>
+      </div>
+
       <div class="buttons">
         <div class="login">
-          <ion-button class="loginBtn" type="submit" expand="block" shape="round" [disabled]="!credentials.valid">Sign In</ion-button>
+          <ion-button class="loginBtn" type="submit" expand="block" shape="round" [disabled]="!captchaValid">Sign In</ion-button>
         </div>
 
         <div class="noAcc">
