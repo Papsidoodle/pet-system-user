@@ -29,11 +29,8 @@ export class AuthService {
   // signup
   signup(email: string, password: string): Observable<UserCredential> {
     const user = from(createUserWithEmailAndPassword(this.auth, email, password).then((result) => {
-      sendEmailVerification(this.auth.currentUser).then((fukit) => {
-        console.log(fukit);
-      }).catch((err) => {
-        console.log(err);
-      })
+      console.log(result)
+      sendEmailVerification(this.auth.currentUser);
       return result;
     }));
     return user;
@@ -42,8 +39,10 @@ export class AuthService {
   // login
   login(email: string, password: string): Observable<any> {
     const observable = from(signInWithEmailAndPassword(this.auth, email, password).then((result) => {
-      if (!result.user?.emailVerified) {
-        this.showAlert('Email Verification', 'Please verify your email address. A verification link has been sent to your email address.');
+      console.log(result)
+      if (result.user?.emailVerified == false) {
+        // this.showAlert('Email Verification', 'Please verify your email address. A verification link has been sent to your email address.');
+        sendEmailVerification(this.auth.currentUser);
         this.logout();
       }
     }));
@@ -59,6 +58,7 @@ export class AuthService {
     });
     await alert.present();
   }
+
   logout(): Observable<any> {
     return from(this.auth.signOut());
   }
@@ -79,7 +79,7 @@ export class AuthService {
           throw new Error('Not Authenticated');
         }
         return sendEmailVerification(user).then((test) => {
-          console.log('email sent');
+          console.log('email sent', test);
         }).catch((err) => {
           console.log(err);
         });

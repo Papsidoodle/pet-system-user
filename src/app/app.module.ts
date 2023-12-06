@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 // firebase integration
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -36,7 +37,8 @@ export function playerFactory() {
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage()),
     LottieModule.forRoot({ player: playerFactory }),
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    RecaptchaModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
