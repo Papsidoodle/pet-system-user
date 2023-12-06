@@ -131,7 +131,12 @@ const routes: Routes = [
   {
     path: 'medical-history/:uid/:petId/:medicalHistoryId',
     loadChildren: () => import('./pages/pets-content/medical-history/medical-history.module').then( m => m.MedicalHistoryPageModule)
+  },  {
+    path: 'about-app',
+    loadChildren: () => import('./pages/about-app/about-app.module').then( m => m.AboutAppPageModule)
   },
+
+
 
 ];
 
